@@ -1,2 +1,38 @@
 \begin{answer}
+    
+    \begin{align*} 
+        \frac{\partial}{\partial\theta_j}J(\theta) &= -\frac{1}{m} \sum_{i=1}^m  \frac{\partial}{\partial\theta_j}  \left[y^{(i)}\log( g(\theta^{T}x^{(i)}))
+        +  (1 - y^{(i)})\log(1 - g(\theta^{T}x^{(i)}))\right]\\
+        \shortintertext{Using derivation from \href{http://cs229.stanford.edu/notes/cs229-notes1.pdf}{lecture notes} page 18:}
+        &= -\frac{1}{m} \sum_{i=1}^m  (y^{(i)}-h_{\theta}(x^{(i)}))x^{(i)}_{j}\\
+    \end{align*} 
+    So for a Hessian $H$:
+    \begin{align*}
+        H_{jk} &= \frac{\partial^2}{\partial\theta_j\partial\theta_k}J(\theta) \\
+        &= -\frac{1}{m} \sum_{i=1}^m  \frac{\partial}{\partial\theta_k} \left[ (y^{(i)}-h_{\theta}(x^{(i)}))x^{(i)}_{j} \right]\\
+        &= -\frac{1}{m} \sum_{i=1}^m  \frac{\partial}{\partial\theta_k} \left[ (y^{(i)}-g(\theta^{T}x^{(i)}))x^{(i)}_{j} \right]\\
+        &= -\frac{1}{m} \sum_{i=1}^m  \frac{\partial}{\partial\theta_k} \left[ -g(\theta^{T}x^{(i)})x^{(i)}_{j} \right]\\
+        &= \frac{1}{m} \sum_{i=1}^m   g(\theta^{T}x^{(i)})(1-g(\theta^{T}x^{(i)}))\frac{\partial}{\partial\theta_k}\left[\theta^{T}x^{(i)} \right] x^{(i)}_{j} \\
+        &= \frac{1}{m} \sum_{i=1}^m   g(\theta^{T}x^{(i)})(1-g(\theta^{T}x^{(i)})) x^{(i)}_{k} x^{(i)}_{j} \\
+        &= \frac{1}{m} \sum_{i=1}^m   h_{\theta}(x^{(i)})(1-h_{\theta}(x^{(i)})) x^{(i)}_{k} x^{(i)}_{j} \\
+    \end{align*}
+    Using outer product $X=xx^T$, $X_{jk} = x_j x_k$ , we know:
+    \begin{align*}
+        H  &= \frac{1}{m} \sum_{i=1}^m   h_{\theta}(x^{(i)})(1-h_{\theta}(x^{(i)})) x^{(i)} {x^{(i)}}^{T} \\
+    \end{align*}
+
+    To prove $H$ is positive semidefinite
+    \begin{align*}
+        z^THz  &= \frac{1}{m} \sum_{i=1}^m   h_{\theta}(x^{(i)})(1-h_{\theta}(x^{(i)})) z^T x^{(i)} {x^{(i)}}^{T} z \\
+        &= \frac{1}{m} \sum_{i=1}^m   h_{\theta}(x^{(i)})(1-h_{\theta}(x^{(i)})) z^T x^{(i)}  (z^T{x^{(i)}})^{T} \\
+        \shortintertext{Since $z^T x^{(i)}$ is a scalar for vectors $z$ and $x^{(i)}$, we can drop the transpose:}
+        &= \frac{1}{m} \sum_{i=1}^m   h_{\theta}(x^{(i)})(1-h_{\theta}(x^{(i)}))  (z^T{x^{(i)}})^2 \\
+    \end{align*}
+    We know:
+    \begin{itemize}
+        \item $m \ge 0$ since it is the total number of samples
+        \item $h_{\theta}(x^{(i)})(1 - h_{\theta}(x^{(i)})) \ge 0$  since $0 \le h_{\theta}(x^{(i)}) \le 1$
+        \item $(z^T{x^{(i)}})^2 \ge 0$ since it is squared
+    \end{itemize}
+    So we can conclude that $z^T H z \ge 0$ and therefore $H \succeq 0$ 
 \end{answer}
