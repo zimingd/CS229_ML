@@ -20,6 +20,7 @@ def main(train_path, eval_path, pred_path):
     # Train a logistic regression classifier
     # Plot decision boundary on top of validation set set
     # Use np.savetxt to save predictions on eval set to pred_path
+
     initial_theta = np.zeros(x_train.shape[1])
     log_reg = LogisticRegression(step_size=0.2, max_iter=100, eps=1e-5,
                  theta_0=initial_theta, verbose=True)
@@ -76,10 +77,9 @@ class LogisticRegression(LinearModel):
             
             #update theta
             theta_prev = theta
-            theta -= np.linalg.solve(hessian, gradient) # same as inv(hessian) x gradient
+            theta = theta - np.linalg.solve(hessian, gradient) # same as inv(hessian) x gradient
 
             iterations += 1
-
         self.theta = theta
         # *** END CODE HERE ***
 
@@ -93,7 +93,7 @@ class LogisticRegression(LinearModel):
             Outputs of shape (m,).
         """
         # *** START CODE HERE ***
-        return self._h(self.theta, x)
+        return (self._h(self.theta, x) >= 0.5).astype(np.int)
         # *** END CODE HERE ***
 
     def _h(self, theta, x):
