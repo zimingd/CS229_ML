@@ -89,5 +89,5 @@ class GDA(LinearModel):
             Outputs of shape (m,).
         """
         # *** START CODE HERE ***
-        return (1/(1+np.exp(-np.inner(self.theta,x))) >= 0.5).astype(np.int)
+        return 1/(1+np.exp(-np.inner(self.theta,x)))
         # *** END CODE HERE

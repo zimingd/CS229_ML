@@ -1,2 +1,11 @@
 \begin{answer}
+    \begin{align*}
+        p(t^{(i)}= 1|x^{(i)}) &= \frac{p(x^{(i)} | t^{(i)}= 1) p(t^{(i)}= 1)}{p(x^{(i)})}\\
+        &= \frac{p(x^{(i)} | t^{(i)}= 1)p(y^{(i)}=1|t^{(i)}=1) p(t^{(i)}= 1)}{p(x^{(i)}) p(y^{(i)}=1|t^{(i)}=1)}\\
+         &= \frac{p(y^{(i)}=1 , x^{(i)} |t^{(i)}=1) p(t^{(i)}= 1)}{p(x^{(i)}) p(y^{(i)}=1|t^{(i)}=1)}\text{\ \ \ Because $x$ and $y$ independent}\\
+         &= \frac{p(y^{(i)}=1|x^{(i)}) p(x^{(i)}| t^{(i)}= 1) p(t^{(i)}= 1)}{p(x^{(i)}) p(y^{(i)}=1|t^{(i)}=1)}\text{\ \ \ Chain rule}\\
+         &= \frac{p(y^{(i)}=1|x^{(i)}) p(x^{(i)})}{p(x^{(i)}) p(y^{(i)}=1|t^{(i)}=1)}\\
+         &= \frac{p(y^{(i)}=1|x^{(i)}) }{ p(y^{(i)}=1|t^{(i)}=1)}
+    \end{align*}
+    So $\alpha = p(y^{(i)}=1|t^{(i)}=1)$
 \end{answer}

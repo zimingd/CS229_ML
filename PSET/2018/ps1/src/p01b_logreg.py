@@ -93,7 +93,7 @@ class LogisticRegression(LinearModel):
             Outputs of shape (m,).
         """
         # *** START CODE HERE ***
-        return (self._h(self.theta, x) >= 0.5).astype(np.int)
+        return self._h(self.theta, x)
         # *** END CODE HERE ***
 
     def _h(self, theta, x):
