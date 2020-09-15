@@ -1,2 +1,12 @@
 \begin{answer}
+    \begin{align*}
+        \frac{\partial}{\partial^2\eta}\int p(y;\eta)\ dy&= \frac{\partial}{\partial\eta}\int \frac{\partial}{\partial\eta} p(y;\eta)\ dy\\\
+        &= \frac{\partial}{\partial\eta}\int \frac{\partial}{\partial\eta} p(y;\eta)\ dy\\
+        &= \frac{\partial}{\partial\eta} \int b(y)\exp(\eta y - a(\eta))(y - \frac{\partial}{\partial \eta} a(\eta))\ dy\\
+        &= \int b(y)\exp(\eta y - a(\eta))(y - \frac{\partial}{\partial \eta} a(\eta))^2 - b(y)\exp(\eta y - a(\eta))\frac{\partial}{\partial^2 \eta} a(\eta)\ dy\\
+        &= \int (y - \mathbb{E}[Y;\eta])^2p(y;\eta)\ dy - \frac{\partial}{\partial^2 \eta} a(\eta) \int p(y;\eta)\ dy\\
+        0 &= \int (y - \mathbb{E}[Y;\eta])^2p(y;\eta)\ dy - \frac{\partial}{\partial^2 \eta} a(\eta) (1)\\
+        \int (y - \mathbb{E}[Y;\eta])^2p(y;\eta)\ dy &=  \frac{\partial}{\partial^2 \eta} a(\eta)\\
+        \text{Var}[Y;\eta] &=  \frac{\partial}{\partial^2 \eta} a(\eta) \\
+    \end{align*}
 \end{answer}

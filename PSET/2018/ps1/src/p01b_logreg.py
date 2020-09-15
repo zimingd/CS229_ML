@@ -52,8 +52,7 @@ class LogisticRegression(LinearModel):
             y: Training example labels. Shape (m,).
         """
         # *** START CODE HERE ***
-        m = x.shape[0]
-        n = x.shape[1]
+        m, n = x.shape
 
         iterations = 0
         # use initial theta
@@ -81,6 +80,7 @@ class LogisticRegression(LinearModel):
 
             iterations += 1
         self.theta = theta
+        print(theta)
         # *** END CODE HERE ***
 
     def predict(self, x):

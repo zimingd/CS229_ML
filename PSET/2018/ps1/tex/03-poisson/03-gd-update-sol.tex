@@ -1,2 +1,21 @@
 \begin{answer}
+    In GLM we assume $\eta = \theta^Tx$ so:
+    \begin{align*}
+        p(y^{(i)}|x^{(i)} ; \theta) &= \frac{1}{y^{(i)}!}\exp(\eta^T y^{(i)}-e^\eta)\\
+        &= \frac{1}{y^{(i)}!}\exp((\theta^T x^{(i)})^T y^{(i)}-e^{\theta^Tx^{(i)}})\\
+        &= \frac{1}{y^{(i)}!}\exp((\theta^T x^{(i)}) y^{(i)}-e^{\theta^Tx^{(i)}}) \text{\ \ \ \ \ since $\theta^Tx$ is scalar}
+    \end{align*}
+    For update rule of a single $\theta_j \text{ of } \theta \in \R^n$ :
+    \begin{align*}
+        \frac{\partial}{\partial\theta_j}\log p(y^{(i)}|x^{(i)} ; \theta) &= \frac{\partial}{\partial\theta_j}\log \left[ \frac{1}{y^{(i)}!}\exp((\theta^T x^{(i)}) y^{(i)}-e^{\theta^Tx^{(i)}})\right]\\
+        &= \frac{\partial}{\partial\theta_j} \left[\log \frac{1}{y^{(i)}!} + (\theta^T x^{(i)}) y^{(i)}-e^{\theta^Tx^{(i)}} \right]\\ 
+        &= \frac{\partial}{\partial\theta_j} \left[(\theta^T x^{(i)}) y^{(i)}-e^{\theta^Tx^{(i)}} \right]\\ 
+        &= \frac{\partial}{\partial\theta_j} \left[(\sum_{k=1}^m\theta_k x^{(i)}_k) y^{(i)}-e^{(\sum_{k=1}^m\theta_k x^{(i)}_k)} \right]\\ 
+        &= x^{(i)}_j y^{(i)}-\frac{\partial}{\partial\theta_j} \left[e^{(\sum_{k=1}^m\theta_k x^{(i)}_k)} \right]\\ 
+        &= x^{(i)}_j y^{(i)}-e^{\theta^Tx^{(i)}}x^{(i)}_j\\ 
+        &= x^{(i)}_j (y^{(i)}-e^{\theta^Tx^{(i)}})\\ 
+    \end{align*}
+    \begin{equation*}
+        \theta_j := \theta_j + \alpha (y^{(i)}-e^{\theta^Tx^{(i)}})x_j
+    \end{equation*}
 \end{answer}

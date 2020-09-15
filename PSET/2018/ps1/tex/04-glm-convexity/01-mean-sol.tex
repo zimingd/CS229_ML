@@ -1,2 +1,15 @@
 \begin{answer}
+
+    \begin{align*}
+        \frac{\partial}{\partial \eta} \int p(y;\eta) dy &= \int \frac{\partial}{\partial \eta} p(y;\eta) dy\\
+        &=  \int \frac{\partial}{\partial \eta} \left[b(y)\exp(\eta y - a(\eta))\right]\ dy\\
+        &= \int b(y)\exp(\eta y - a(\eta))(y - \frac{\partial}{\partial \eta} a(\eta))\ dy\\\\
+        &= \int yb(y)\exp(\eta y - a(\eta))\ dy - \frac{\partial}{\partial \eta} a(\eta) \int b(y)\exp(\eta y - a(\eta))\ dy\\\\
+        &= \int yp(y;n)\ dy -  \frac{\partial}{\partial \eta} a(\eta)  \int p(y;n)\ dy\\
+        &= \mathbb{E}[Y; \eta] -  \frac{\partial}{\partial \eta} a(\eta)  \int p(y;n)\ dy\\
+        \shortintertext{Because $\int p(y;n)\ dy = 1$ we have:}\\
+        \frac{\partial}{\partial \eta} 1 &= \mathbb{E}[Y; \eta] -  \frac{\partial}{\partial \eta} a(\eta)  (1)\\
+        0 &= \mathbb{E}[Y; \eta] -  \frac{\partial}{\partial \eta} a(\eta) \\
+        \mathbb{E}[Y; \eta] &=   \frac{\partial}{\partial \eta} a(\eta) \\
+    \end{align*}
 \end{answer}

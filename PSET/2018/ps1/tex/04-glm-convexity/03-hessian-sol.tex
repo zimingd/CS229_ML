@@ -1,2 +1,30 @@
 \begin{answer}
+    \begin{align*}
+        \ell(\theta) &= -\sum_{i=1}^m \log p(y^{(i)} | x^{(i)}; \theta)\\
+        &= -\sum_{i=1}^m \log b(y^{(i)}) + \theta^Tx^{(i)} y^{(i)} - a(\theta^Tx^{(i)})\\
+    \end{align*}
+
+    \begin{align*}
+        H_{jk} &= \frac{\partial}{\partial\theta_j\partial\theta_k} \left[ -\sum_{i=1}^m \log b(y^{(i)}) + \theta^Tx^{(i)} y^{(i)} - a(\theta^Tx^{(i)}) \right] \\
+        &=  \frac{\partial}{\partial\theta_j\partial\theta_k} \left[ \sum_{i=1}^m  a(\theta^Tx^{(i)}) \right] \\
+        \shortintertext{by chain rule $\frac{\partial}{\partial\theta_j} a(\eta) = \frac{\partial}{\partial\eta} a(\eta) \frac{\partial\eta}{\partial\theta_j} 
+        = \frac{\partial}{\partial\eta} a(\eta) \frac{\partial}{\partial\theta_j}\theta^Tx^{(i)} = \frac{\partial}{\partial\eta} a(\eta)x^{(i)}_j $}
+        &=  \sum_{i=1}^m  \frac{\partial}{\partial\eta^2} a(\theta^Tx^{(i)}) x_j x_k \\
+        &=  \sum_{i=1}^m  \text{Var}[Y|X;\theta] x_j x_k 
+    \end{align*}
+    Using outer product $X=xx^T$, $X_{jk} = x_j x_k$ , we know the Hessian is :
+    \begin{equation*}
+        H =  \text{Var}[Y|X;\theta] \sum_{i=1}^m   x^{(i)} {x^{(i)}}^T
+    \end{equation*}
+    To prove positive semidefiniteness, for any vector $z$:
+    \begin{align*}
+        z^THz &= \text{Var}[Y|X;\theta] \sum_{i=1}^m  z^T x^{(i)} {x^{(i)}}^T z\\
+        &= \text{Var}[Y|X;\theta] \sum_{i=1}^m  z^T x^{(i)} (z^T {x^{(i)}} )^T\\
+        \shortintertext{since $z^Tx$ is scalar we can drop the transpose}\\
+        &= \text{Var}[Y|X;\theta] \sum_{i=1}^m  (z^T {x^{(i)}} )^2\\
+    \end{align*}
+    Since $\text{Var}[Y|X;\theta] \ge 0$ and $(z^T {x^{(i)}} )^2 \ge 0$
+    \begin{equation*}
+        z^THz \ge 0 \implies H \succeq 0 \implies \text{NLL loss of GLM is convex}
+    \end{equation*}
 \end{answer}
