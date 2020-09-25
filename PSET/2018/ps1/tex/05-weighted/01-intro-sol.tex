@@ -1,2 +1,55 @@
 \begin{answer}
+    \begin{enumerate}
+        \item \begin{align*}
+            J(\theta) &= \frac{1}{2} \sum_{i=1}^m w^{(i)}
+            \left(\theta^Tx^{(i)} - y^{(i)}\right)^2\\
+            &=\frac{1}{2}\left[ \theta^T x^{(1)} - y^{(1)}, ...\ ,\theta^T x^{(i)} - y^{(i)}, ...\ ,\theta^T x^{(m)} - y^{(m)} \right] 
+            \begin{bmatrix}
+                w^{(1)} &  & & &\\
+                 & \ddots & & &\\
+                 & &w^{(i)} & &\\
+                 &  & & \ddots&\\
+                 &  & & &w^{(m)}
+            \end{bmatrix} 
+            \begin{bmatrix}
+                \theta^T x^{(1)} - y^{(1)}\\
+                 \vdots\\
+                 \theta^T x^{(i)} - y^{(i)}\\
+                 \vdots\\
+                 \theta^T x^{(m)} - y^{(m)}
+            \end{bmatrix}\\
+            &=(X\theta - {y})^T W (X\theta - {y})
+        \end{align*}
+        For $ W = \text{diag}( w^{(1)}, ...\ ,w^{(i)}, ...\ ,w^{(m)} )$
+        \item \begin{align*}
+            \nabla_\theta J(\theta) &= \frac{1}{2}\nabla_\theta \left[ (X\theta - {y})^T W (X\theta - {y}) \right]\\
+            &= \frac{1}{2}\nabla_\theta \left[ (\theta^T X^T - {y}^T) W (X\theta - {y}) \right]\\
+            &= \frac{1}{2}\nabla_\theta \left[ \theta^T X^T W X\theta - {y}^T W X\theta  - \theta^T X^T W {y} + y^Ty \right]\\
+            &= \frac{1}{2}\nabla_\theta \left[ \theta^T X^T W X\theta - {y}^T W X\theta  - (\theta^T X^T W {y})^T + y^Ty \right] \ \  (\text{$\theta^T X^T W {y}$ is scalar})\\
+            &= \frac{1}{2}\nabla_\theta \left[ \theta^T X^T W X\theta - 2{y}^T W X\theta + y^Ty \right] \ \ (\text{$W = W^T$ because diagonal})\\
+            &= \frac{1}{2}\nabla_\theta \left[ \text{tr}(\theta^T X^T W X\theta) - 2\text{tr}({y}^T W X\theta) + \text{tr}(y^Ty) \right] \ \ (\text{apply trace to scalars})\\
+            \shortintertext{Using property: $\nabla_{A^T} \text{tr}(ABA^TC) = B^TA^TC^T+BA^TC $  with $A^T=\theta, B = X^TWX = B^T, C = I$  for first part. $\text{tr}AB=\text{tr}BA$ and $\nabla_A \text{tr}AB=B^T$ for second part}
+            &= \frac{1}{2} \left[  X^T W X\theta + \theta^T (X^T W X)^T  - 2 X^T W {y} + 0 \right]\\
+            &= \frac{1}{2} \left[  X^T W X\theta  - X^T W {y} \right]\\
+            &=   X^T W X\theta  - X^T W {y} \\
+        \end{align*}
+        Setting the gradient $\nabla_\theta J(\theta) = 0$:
+        \begin{equation*}
+            \theta = (X^T W X)^{-1} X^T W {y}
+        \end{equation*}
+        \item Optimizing for log-ikelihood:
+        \begin{align*}
+            \ell(\theta) &= \sum_{i=1}^m\log p(y^{(i)}|x^{(i)};\theta)\\
+            &=\sum_{i=1}^m\log \left[\frac{1}{\sqrt{2\pi}\sigma^{(i)}} \exp\left(-
+            \frac{(y^{(i)} - \theta^Tx^{(i)})^2}{2(\sigma^{(i)})^2}\right) \right]\\
+            &=\sum_{i=1}^m \left[\log\frac{1}{\sqrt{2\pi}\sigma^{(i)}}  -
+            \frac{(y^{(i)} - \theta^Tx^{(i)})^2}{2(\sigma^{(i)})^2} \right]
+        \end{align*}
+        We want to minimze:
+            \begin{equation*}
+                J(\theta) = \sum_{i=1}^m  \frac{(y^{(i)} - \theta^Tx^{(i)})^2}{2(\sigma^{(i)})^2} = \frac{1}{2} \sum_{i=1}^m  \frac{1}{(\sigma^{(i)})^2} (\theta^Tx^{(i)} - y^{(i)} )^2
+            \end{equation*}
+        so $w^{(i)} =\frac{1}{(\sigma^{(i)})^2} $
+    \end{enumerate}
+
 \end{answer}
